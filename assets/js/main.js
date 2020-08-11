@@ -1,10 +1,11 @@
+// jquery?DOM??????????????
 $(document).ready(function () {
-
+    //????
     var lat;
     var long;
 
     if (navigator.geolocation) {
-
+        //??????
         navigator.geolocation.getCurrentPosition(function (position) {
 
             lat = position.coords.latitude;
