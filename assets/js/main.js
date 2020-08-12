@@ -1,15 +1,15 @@
-// jquery?DOM??????????????
+// jquery、DOM要素が始まった後に処理開始
 $(document).ready(function () {
-    //????
-    var lat;
-    var long;
+    //緯度経度
+    let lat;
+    let long;
 
     if (navigator.geolocation) {
-        //??????
+        //現在地取得
         navigator.geolocation.getCurrentPosition(function (position) {
-
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
+            
+            lat = position.coords.latitude;//緯度
+            long = position.coords.longitude;//経度
 
             var api = 'https://fcc-weather-api.glitch.me/api/current?lat=' + lat + '&lon=' + long + '';
 
@@ -56,6 +56,15 @@ $(document).ready(function () {
                 icons.play();
 
             });
+        }, function(error){
+            // エラーコードのメッセージを定義
+            let errorMessage = {
+                0: "原因不明のエラーが発生しました…。" ,
+                1: "位置情報の取得が許可されませんでした…。" ,
+                2: "電波状況などで位置情報が取得できませんでした…。" ,
+                3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました…。" ,
+            };
+            console.log(errorMessage[error.code]);
         });
     }
 });
