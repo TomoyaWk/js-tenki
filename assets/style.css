@@ -25,8 +25,6 @@
     font-family: 'Abel', sans-serif;
     animation-name: introduction;
     animation-duration: 2s;
-    
-   
 }
 .row1{
     width: 50%;
@@ -64,6 +62,14 @@
     pointer-events: auto;
     transition: color 1s;
 }
+.temp-max, .temp-min{
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 1s;
+}
+
 .temp-type{
     color: #3EB9E6;
     font-size: 80px;

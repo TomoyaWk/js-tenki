@@ -1,61 +1,41 @@
-// jquery、DOM要素が始まった後に処理開始
-$(document).ready(function () {
-    //緯度経度
-    let lat;
+window.addEventListener("load", ()=>{
     let long;
+    let lat;
+    let temprature = document.querySelector('.temp');//温度
+    let tempMax = document.querySelector('.temp-max');
+    let tempMin = document.querySelector('.temp-min');
+
+    let weatherDescription = document.querySelector('.weather-description'); //cloudy等気候名 
+
+    let location = document.querySelector('.weather-location'); //取得できた座標地名
+
 
     if (navigator.geolocation) {
-        //現在地取得
-        navigator.geolocation.getCurrentPosition(function (position) {
-            
-            lat = position.coords.latitude;//緯度
-            long = position.coords.longitude;//経度
+        navigator.geolocation.getCurrentPosition(position => {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
 
-            var api = 'https://fcc-weather-api.glitch.me/api/current?lat=' + lat + '&lon=' + long + '';
+            let api = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
 
-            $.getJSON(api, function (res) {
+            fetch(api)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    console.log(data.weather);
 
-                var celsius = res.main.temp;
-                var farenheit = (celsius * 1.8) + 32;
+                    //APIから取得した値を代入する
+                    temprature.textContent = Math.trunc(data.main.temp);
+                    tempMax.textContent = Math.trunc(data.main.temp_max);
+                    tempMin.textContent = Math.trunc(data.main.temp_min);
+                    location.textContent = data.name;
+                    weatherDescription.textContent = data.weather[0].description;
 
-                var location = res.name;
-                
 
 
-                $('.weather-location').html(location);
-                $('.temp').html(Math.floor(celsius));
-                $('.weather-description').html(res.weather[0].description);
-                $('.weatherType').attr('id', res.weather[0].main);
-                $('.row2').on('click', function () {
-                    if ($('.temp').html() == (Math.floor(celsius))) {
-                        $('.temp').html(Math.floor(farenheit));
-                        $('.temp-type').html('°F');
-
-                    } else {
-                        $('.temp').html(Math.floor(celsius));
-                        $('.temp-type').html('°C');
-                    }
                 });
 
-
-                //SETTING UP THE ICON 
-                var icons = new Skycons({
-                    "color": "white"
-                });
-
-                icons.set("Clear", Skycons.CLEAR_DAY);
-                icons.set("Clear-night", Skycons.CLEAR_NIGHT);
-                icons.set("Partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
-                icons.set("Partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
-                icons.set("Clouds", Skycons.CLOUDY);
-                icons.set("Rain", Skycons.RAIN);
-                icons.set("Sleet", Skycons.SLEET);
-                icons.set("Snow", Skycons.SNOW);
-                icons.set("Wind", Skycons.WIND);
-                icons.set("Fog", Skycons.FOG);
-                icons.play();
-
-            });
         }, function(error){
             // エラーコードのメッセージを定義
             let errorMessage = {
@@ -64,7 +44,63 @@ $(document).ready(function () {
                 2: "電波状況などで位置情報が取得できませんでした…。" ,
                 3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました…。" ,
             };
-            console.log(errorMessage[error.code]);
-        });
+            alart(errorMessage[error.code]);
+        })
     }
-});
+})
+
+
+
+
+
+
+
+
+
+
+
+// // jquery、DOM要素が始まった後に処理開始
+// $(document).ready(function () {
+//     //緯度経度
+//     let lat;
+//     let long;
+
+//     if (navigator.geolocation) {
+//         //現在地取得
+//         navigator.geolocation.getCurrentPosition(function (position) {
+            
+//             lat = position.coords.latitude;//緯度
+//             long = position.coords.longitude;//経度
+
+//             let api = 'https://fcc-weather-api.glitch.me/api/current?lat=' + lat + '&lon=' + long + '';
+
+//             $.getJSON(api, function (res) {
+//                 console.log(res);
+
+//                 let celsius = res.main.temp;
+//                 let farenheit = (celsius * 1.8) + 32;
+
+//                 let location = res.name;
+                
+                
+
+//                 //SETTING UP THE ICON 
+//                 var icons = new Skycons({
+//                     "color": "white"
+//                 });
+
+//                 icons.set("Clear", Skycons.CLEAR_DAY);
+//                 icons.set("Clear-night", Skycons.CLEAR_NIGHT);
+//                 icons.set("Partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
+//                 icons.set("Partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
+//                 icons.set("Clouds", Skycons.CLOUDY);
+//                 icons.set("Rain", Skycons.RAIN);
+//                 icons.set("Sleet", Skycons.SLEET);
+//                 icons.set("Snow", Skycons.SNOW);
+//                 icons.set("Wind", Skycons.WIND);
+//                 icons.set("Fog", Skycons.FOG);
+//                 icons.play();
+//             });
+//         }, );
+//     }
+// });
