@@ -4,6 +4,8 @@ window.addEventListener("load", ()=>{
     let temprature = document.querySelector('.temp');//温度
     let tempMax = document.querySelector('.temp-max');//最高温度
     let tempMin = document.querySelector('.temp-min');//最低温度
+    let tempSection = document.querySelector('.row2');
+    let tempType = document.querySelector('.temp-type');//温度表示タイプ
 
     let weatherDescription = document.querySelector('.weather-description'); //cloudy等気候名 
     let location = document.querySelector('.weather-location'); //取得できた座標地名
@@ -21,8 +23,6 @@ window.addEventListener("load", ()=>{
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
-                    console.log(data.weather);
 
                     //APIから取得した値を代入する
                     temprature.textContent = Math.trunc(data.main.temp);
@@ -30,7 +30,7 @@ window.addEventListener("load", ()=>{
                     tempMin.textContent = Math.trunc(data.main.temp_min);
                     location.textContent = data.name;
                     weatherDescription.textContent = data.weather[0].description;
-                    icon.id = data.weather[0].main;//アイコン位置のIDを変更
+                    icon.id = data.weather[0].main;//アイコン位置のIDを気候名の文字列へ変更
 
 
                     //アイコン設置
@@ -47,6 +47,18 @@ window.addEventListener("load", ()=>{
                     icons.set("Wind", Skycons.WIND);
                     icons.set("Fog", Skycons.FOG);
                     icons.play();
+
+                    //摂氏→華氏変換
+                    tempSection.addEventListener('click', () =>{
+                        if (tempType.textContent === "°F"){
+                            temprature.textContent = Math.trunc(data.main.temp);
+                            tempType.textContent = "°C";
+                        } else {
+                            temprature.textContent = Math.floor(((data.main.temp) * 1.8 ) + 32);
+                            tempType.textContent = "°F";
+                        }
+                    });
+
                 });
         }, function(error){
             // エラーコードのメッセージを定義
