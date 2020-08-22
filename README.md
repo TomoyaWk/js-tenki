@@ -6,7 +6,7 @@ Weather app with darksky api.
 
 ## TODO
 
-- cssFWを導入して見た目の改修
+- cssFW(bulma)
 - vuejsを導入して同様の動作をさせる
 - 昨日、翌日の天気表示
 - 行けるなら1週間の表示とか
