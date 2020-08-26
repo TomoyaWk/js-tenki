@@ -9,7 +9,7 @@ window.addEventListener("load", ()=>{
 
     let weatherDescription = document.querySelector('.weather-description'); //cloudy等気候名 
     let location = document.querySelector('.weather-location'); //取得できた座標地名
-    let icon = document.querySelector('.weatherType');
+    let icon = document.querySelector('.weather-type');
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -23,7 +23,7 @@ window.addEventListener("load", ()=>{
                     return response.json();
                 })
                 .then(data => {
-
+                    
                     //APIから取得した値を代入する
                     temprature.textContent = Math.trunc(data.main.temp);
                     tempMax.textContent = Math.trunc(data.main.temp_max);
@@ -34,7 +34,7 @@ window.addEventListener("load", ()=>{
 
 
                     //アイコン設置
-                    let icons = new Skycons({"color":"white"});
+                    let icons = new Skycons({"color":"blue"});
                     //天気ＩＤに合わせアイコン設定する
                     icons.set("Clear", Skycons.CLEAR_DAY);
                     icons.set("Clear-night", Skycons.CLEAR_NIGHT);

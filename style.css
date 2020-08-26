@@ -1,0 +1,12 @@
+.text-centered {
+    text-align: center;
+}
+
+.weather-type {
+    display: block;
+    margin: auto;
+}
+
+.content {
+    font-size: 2em;
+}

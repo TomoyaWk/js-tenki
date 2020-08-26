@@ -5,28 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather Api_test</title>
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./node_modules/skeleton-css/css/normalize.css">
+    <link rel="stylesheet" href="./node_modules/skeleton-css/css/skeleton.css">
+    <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 </head>
 <body>
-    
     <div class="container">
-        <div class="weather-box">
-            <div class="row1">
-                <h2 class="weather-location"></h2>
-                <canvas class="weatherType" id="icon1" width="128" height="128"></canvas>
+        <div class="row">          
+            <div class="text-centered">
+                <h1>Weather-Infometion</h1>
+                        <div class="weather-container">
+                            <canvas class="weather-type" id="icon1" width="246" height="246"></canvas>
+                            <h2 class="weather-location"></h2> 
+                            <h2 class="weather-description"></h2>
+                        </div>
+                    
+                    <div class="content">
+                        <span class="temp"></span>
+                        <span class="temp-type">°C</span>
+                    </div>
+                    <div class="content">
+                        <span class="temp-max"></span> | <span class="temp-min"></span>
+                    </div>
+                    
+                <div class="footer">
+                    <small>Made by Simo Edwin with FFC WEATHER API.</small>
+                </div>
             </div>
-            <div class="row2">
-                <h1 class="temp"></h1>
-                <span class="temp-type">°C</span>
-            </div>
-                <p>
-                    <span class="temp-max"></span> | <span class="temp-min"></span>
-                </p>
-            <h2 class="weather-description"></h2>
-            <p class="made-by">Made by Simo Edwin with FFC WEATHER API.</p>
         </div>
+
+        
     </div>
+    
     <script src="./assets/js/skycons.js"></script>
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
     <script src="./assets/js/main.js"></script>
